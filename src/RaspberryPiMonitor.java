@@ -10,13 +10,12 @@ import java.net.URL;
 import java.util.*;
 
 public class RaspberryPiMonitor {
-
+    private static String receptorCorreo = "oper.sistemas@grupodinosaurio.com";
+    private static final Integer PruebaCadaMinutos = 60;
     // Dirección IP de la Raspberry Pi
-    private static final String RASPBERRY_PI_IP = "172.17.101.6";
-    // Puerto en el que se ejecuta la aplicación web en la Raspberry Pi
     private static final String WEB_APP_URL = "http://172.17.2.8:9090/preciosDino/";
-
     private static String Mensaje = "Se ha detectado un problema con la Raspberry Pi o la aplicación web.\n";
+
     // Lista de direcciones IP de Raspberry Pi a monitorear
     private static String[][] raspberryInfo = {
             {"RB", "172.17.101.4"},
@@ -59,7 +58,7 @@ public class RaspberryPiMonitor {
                     System.out.println("Fuera del horario de verificación.");
                 }
             }
-        }, 0, 30 * 60 * 1000); // Inicio inmediato y repetir cada 30 minutos
+        }, 0, PruebaCadaMinutos * 60 * 1000);
     }
 
     private static void verificarEstado() {
@@ -115,7 +114,6 @@ public class RaspberryPiMonitor {
     private static void sendEmailAlert() {
         String emisorCorreo = "dinoseleccion@gmail.com";
         String emisorPass = "Dino_2023";
-        String receptorCorreo = "mcastillo@grupodinosaurio.com";
 
         Properties properties = System.getProperties();
         properties.setProperty("mail.smtp.host", "smtp.gmail.com");
@@ -129,7 +127,7 @@ public class RaspberryPiMonitor {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(emisorCorreo));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(receptorCorreo));
-            message.setSubject("Alerta: Problema con la Raspberry Pi o la aplicación web");
+            message.setSubject("Alerta Verificador de Precios");
             message.setText(Mensaje);
 
             Transport transport = session.getTransport("smtp");

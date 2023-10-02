@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="RaspberryPiMonitor:jar">
+    <output-path>$PROJECT_DIR$/out</output-path>
+    <root id="archive" name="RaspberryPiMonitor.jar">
+      <element id="module-output" name="RaspberryPiMonitor" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/javax.mail-1.6.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/activation.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
